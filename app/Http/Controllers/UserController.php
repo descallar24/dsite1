@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-//use App\Models\UserJob; 
+use App\Models\BookAuthorsJob; 
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\Books;
@@ -33,11 +33,11 @@ Class UserController extends Controller {
         $rules = [
         'bookname' => 'required|max:50',
         'yearpublish' => 'required|max:5',
-        'authorid' => 'required|max:10',
+        'authorid' => 'required|numeric|min:1|not_in:0'
 
         ];
         $this->validate($request,$rules);
-        //$userjob = UserJob::findOrFail($request->jobid);
+        $bookauthors = BookAuthorsJob::findOrFail($request->authorid);
         $books = Books::create($request->all());
         return $this->successResponse($books, Response::HTTP_CREATED);
     }
@@ -72,10 +72,10 @@ Response::HTTP_NOT_FOUND);
         $rules = [
             'bookname' => 'required|max:50',
             'yearpublish' => 'required|max:5',
-            'authorid' => 'required|max:10',
-];
+            'authorid' => 'required|numeric|min:1|not_in:0'
+        ];
 $this->validate($request, $rules);
-//$userjob = UserJob::findOrFail($request->jobid);
+$bookauthors = BookAuthorsJob::findOrFail($request->authorid);
 $books = Books::findOrFail($id);
 
 $books->fill($request->all());

@@ -3,10 +3,10 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class UserJob extends Model{
+class BookAuthorsJob extends Model{
    
 
-   protected $table = 'tblbooks';
+   protected $table = 'tblauthors';
 
 // column sa table
    protected $fillable = [
